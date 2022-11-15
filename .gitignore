@@ -1,0 +1,4 @@
+/.idea
+/.vscode
+/server/vendor
+/client/node_modules

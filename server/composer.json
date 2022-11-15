@@ -1,0 +1,22 @@
+{
+    "name": "shekh/zepto-font-group",
+    "description": "Zepto Font App",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ShekhSaifuddin007",
+            "email": "saifsabbir4@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        },
+        "files": [
+            "app/helpers.php"
+        ]
+    }
+}
