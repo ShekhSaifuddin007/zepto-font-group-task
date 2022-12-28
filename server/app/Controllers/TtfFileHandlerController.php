@@ -96,6 +96,10 @@ class TtfFileHandlerController
                 @unlink($file);
             }
 
+            $this->db->query("DELETE FROM font_group WHERE ttf_files_id = :ttf_files_id", [
+                'ttf_files_id' => request()->input('id')
+            ]);
+
             $this->db->query("DELETE FROM ttf_files WHERE id = :id", [
                 'id' => request()->input('id')
             ]);

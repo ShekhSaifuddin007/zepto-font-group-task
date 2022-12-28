@@ -1,6 +1,10 @@
 <script setup>
 import {ref} from "vue";
 
+import { useNotification } from "@kyvg/vue3-notification";
+
+const notification = useNotification()
+
 const props = defineProps({
     font: Object
 })
@@ -18,8 +22,15 @@ function deleteFont(font) {
 
     if (confirm('Are you sure.?')) {
         $http.post(`/delete/file`, formData)
-            .then(() => {
+            .then((res) => {
                 emit('getFonts')
+
+                notification.notify({
+                    speed: 2000,
+                    type: "success",
+                    title: "Success",
+                    text: res.data.message
+                });
             })
     }
 }

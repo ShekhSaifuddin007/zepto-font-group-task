@@ -43,6 +43,8 @@ class FontGroupController
     {
         $form = $request->all();
 
+        dd($_REQUEST);
+
         $errors = $this->validate($form);
 
         if (empty($errors)) {

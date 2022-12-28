@@ -5,7 +5,14 @@ import { useNotification } from "@kyvg/vue3-notification";
 
 const notification = useNotification()
 
-const fontGroups = ref([])
+const emit = defineEmits(['getFontGroups'])
+
+// const fontGroups = ref([])
+
+defineProps({
+    fontGroups: Array
+})
+
 
 const form = reactive({
     id: '',
@@ -16,7 +23,7 @@ const form = reactive({
 const modal = ref(false)
 
 onMounted(() => {
-    getFontGroups()
+    // getFontGroups()
 
     $http.get('/ttf-files')
         .then(res => {
@@ -24,12 +31,12 @@ onMounted(() => {
         })
 })
 
-function getFontGroups() {
-    $http.get('/font-groups')
-        .then(res => {
-            fontGroups.value = res.data
-        })
-}
+// function getFontGroups() {
+//     $http.get('/font-groups')
+//         .then(res => {
+//             fontGroups.value = res.data
+//         })
+// }
 
 function editFontGroup(group) {
     $http.get('/get-font-groups', {
@@ -116,7 +123,7 @@ function updateFontGroup() {
                     price: ''
                 }]
 
-                getFontGroups()
+                emit('getFontGroups')
 
                 modal.value = false
             })
@@ -136,7 +143,7 @@ function deleteFontGroup(group) {
                 text: res.data.message
             });
 
-            getFontGroups()
+            emit('getFontGroups')
         })
     }
 }
@@ -157,7 +164,7 @@ function removeRow(idx, id) {
                     text: res.data.message
                 });
 
-                getFontGroups()
+                emit('getFontGroups')
 
                 form.fields.splice(idx, 1);
             })

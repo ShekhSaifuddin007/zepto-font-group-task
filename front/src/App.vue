@@ -11,12 +11,22 @@ const fontGroups = ref([])
 
 onMounted(() => {
     getAllFonts()
+    getFontGroups()
 })
 
 function getAllFonts() {
     $http.get('/ttf-files')
         .then((response) => {
             fonts.value = response.data
+
+            getFontGroups()
+        })
+}
+
+function getFontGroups() {
+    $http.get('/font-groups')
+        .then(res => {
+            fontGroups.value = res.data
         })
 }
 </script>
@@ -31,9 +41,9 @@ function getAllFonts() {
 
         <FontTable :fonts="fonts" @getFonts="getAllFonts" />
 
-        <CreateFontGroup />
+        <CreateFontGroup @getFontGroups="getFontGroups" />
 
-        <GroupList />
+        <GroupList :fontGroups="fontGroups" @getFontGroups="getFontGroups" />
     </div>
 
     <notifications />

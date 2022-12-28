@@ -5,6 +5,8 @@ import { useNotification } from "@kyvg/vue3-notification";
 
 const notification = useNotification()
 
+const emit = defineEmits(['getFontGroups'])
+
 const fontList = ref([])
 
 onMounted(() => {
@@ -55,24 +57,27 @@ function saveFontGroup() {
             text: "You have to select at least two fonts."
         });
     } else {
-        $http.post('/font-groups', formData)
-            .then((res) => {
-                notification.notify({
-                    speed: 2000,
-                    type: "success",
-                    title: "Success",
-                    text: res.data.message
-                });
-
-                form.group_title = ''
-                form.fields = [{
-                    id: '',
-                    font_name: '',
-                    ttf_files_id: 'null',
-                    size: '',
-                    price: ''
-                }]
-            })
+        console.log(form)
+        $http.post('/font-groups', form)
+            // .then((res) => {
+            //     notification.notify({
+            //         speed: 2000,
+            //         type: "success",
+            //         title: "Success",
+            //         text: res.data.message
+            //     });
+            //
+            //     form.group_title = ''
+            //     form.fields = [{
+            //         id: '',
+            //         font_name: '',
+            //         ttf_files_id: 'null',
+            //         size: '',
+            //         price: ''
+            //     }]
+            //
+            //     emit('getFontGroups')
+            // })
     }
 }
 
